@@ -9,7 +9,12 @@ export default {
     modelValue: {
       type: [Number, String],
     },
-  }
+  },
+  methods: {
+    inputHandler(event: any) {
+      (this as any).$emit('update:modelValue', event.target.value);
+    },
+  },
 };
 </script>
 <template>
@@ -19,7 +24,7 @@ export default {
     </label>
     <input
       :value="modelValue"
-      @input="$emit('update:modelValue', $event.target.value)"
+      @input="inputHandler"
       type="number"
       id="first-name"
       class="

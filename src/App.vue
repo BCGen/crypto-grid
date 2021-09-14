@@ -1,4 +1,5 @@
 <script lang="ts">
+import Cookies from 'js-cookie';
 import { AppInput, AppTitle, ComputeSection } from './components';
 
 export default {
@@ -10,26 +11,26 @@ export default {
   data() {
     return {
       formData: {
-        investmentAmount: '300',
-        maxPrice: '0.8',
-        minPrice: '0.4',
-        starterPrice: '0.56',
-        grid: '150',
-        unitPreGrid: '3.7',
-        sale: '0.55033',
+        investmentAmount: '',
+        maxPrice: '',
+        minPrice: '',
+        starterPrice: '',
+        grid: '',
+        unitPreGrid: '',
+        sale: '',
       },
-
-      //  formData: {
-      //   investmentAmount: '',
-      //   maxPrice: '',
-      //   minPrice: '',
-      //   starterPrice: '',
-      //   grid: '',
-      //   unitPreGrid: '',
-      //   sale: ''
-      // },
     };
   },
+  beforeCreate() {
+    // const data = Cookies.get('data');
+
+    // if (data) {
+    //   (this as any).formDat = data;
+    // }
+  },
+  // beforeDestroy() {
+  //   Cookies.set('data', (this as any).formData);
+  // },
 };
 </script>
 
