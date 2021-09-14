@@ -29,7 +29,7 @@ export default {
       let { grid, maxPrice, minPrice } = vm.formData;
 
       if (grid - 1 <= 0) {
-        return 0;
+        return new Decimal(0);
       }
 
       maxPrice = new Decimal(maxPrice || 0);
