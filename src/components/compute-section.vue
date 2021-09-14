@@ -23,6 +23,20 @@ export default {
       const vm: any = this;
       return vm.formData.unitPreGrid || vm.getUnitPreGrid(vm.formData);
     },
+    gridRange() {
+      const vm: any = this;
+
+      let { grid, maxPrice, minPrice } = vm.formData;
+
+      if (grid - 1 <= 0) {
+        return 0;
+      }
+
+      maxPrice = new Decimal(maxPrice || 0);
+      minPrice = new Decimal(minPrice || 0);
+
+      return maxPrice.sub(minPrice).div(grid - 1);
+    },
     result(): any {
       const vm: any = this;
 
@@ -32,16 +46,12 @@ export default {
 
       const sale = new Decimal(vm.sale);
       const unitPreGrid = new Decimal(vm.unitPreGrid);
-      let { grid, maxPrice, minPrice, starterPrice } = vm.formData;
+      let { starterPrice } = vm.formData;
 
-      maxPrice = new Decimal(maxPrice);
-      minPrice = new Decimal(minPrice);
       starterPrice = new Decimal(starterPrice);
 
-      const range = maxPrice.sub(minPrice).div(grid - 1);
-
       return unitPreGrid
-        .mul(sale.mul(-0.001).add(range.mul(1.0005)))
+        .mul(sale.mul(-0.001).add(vm.range.mul(1.0005)))
         .toFixed(8);
     },
   },
@@ -69,7 +79,15 @@ export default {
 <template>
   <div class="m-4">
     <div v-if="!isUnitPreGridSet">單網格買賣數量預測：{{ unitPreGrid }}</div>
+
     <div v-if="!isSaleSet">賣出價格：{{ sale }}</div>
-    <span>每格利潤預測：{{ result }}</span>
+
+    <div>
+      <span>網格間距：{{ gridRange }}</span>
+    </div>
+
+    <div>
+      <span>每格利潤預測：{{ result }}</span>
+    </div>
   </div>
 </template>
