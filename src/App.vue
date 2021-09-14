@@ -1,21 +1,53 @@
-<script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import HelloWorld from './components/HelloWorld.vue'
+<script lang="ts">
+import { AppInput, AppTitle, ComputeSection } from './components';
+
+export default {
+  components: {
+    AppInput,
+    AppTitle,
+    ComputeSection,
+  },
+  data() {
+    return {
+      formData: {
+        investmentAmount: '300',
+        maxPrice: '0.8',
+        minPrice: '0.4',
+        starterPrice: '0.56',
+        grid: '150',
+        unitPreGrid: '3.7',
+        sale: '0.55033',
+      },
+
+      //  formData: {
+      //   investmentAmount: '',
+      //   maxPrice: '',
+      //   minPrice: '',
+      //   starterPrice: '',
+      //   grid: '',
+      //   unitPreGrid: '',
+      //   sale: ''
+      // },
+    };
+  },
+};
 </script>
 
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
+  <div class="container mx-auto">
+    <app-title />
+
+    <div class="grid grid-cols-6 gap-6 p-5 shadow">
+      <app-input label="投資額" v-model="formData.investmentAmount" />
+      <app-input label="區間上限價格" v-model="formData.maxPrice" />
+      <app-input label="區間下限價格" v-model="formData.minPrice" />
+      <app-input label="開單時價格" v-model="formData.starterPrice" />
+      <app-input label="網格數量" v-model="formData.grid" />
+      <app-input label="單網格買賣數量" v-model="formData.unitPreGrid" />
+      <app-input label="賣出價格" v-model="formData.sale" />
+    </div>
+    <compute-section :form-data="formData" />
+  </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style lang="scss"></style>
