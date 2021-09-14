@@ -22,15 +22,15 @@ export default {
     };
   },
   beforeCreate() {
-    // const data = Cookies.get('data');
+    const data = Cookies.get('data');
 
-    // if (data) {
-    //   (this as any).formDat = data;
-    // }
+    if (data) {
+      (this as any).formDat = data;
+    }
   },
-  // beforeDestroy() {
-  //   Cookies.set('data', (this as any).formData);
-  // },
+  beforeDestroy() {
+    Cookies.set('data', (this as any).formData);
+  },
 };
 </script>
 
